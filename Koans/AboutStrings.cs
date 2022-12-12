@@ -17,21 +17,21 @@ public class AboutStrings : Koan
 	public void DoubleQuotedStringsAreStrings()
 	{
 		var str = "Hello, World";
-		Assert.Equal(typeof(FillMeIn), str.GetType());
+		Assert.Equal(typeof(String), str.GetType());
 	}
 
 	[Step(2)]
 	public void SingleQuotedStringsAreNotStrings()
 	{
 		var str = 'H';
-		Assert.Equal(typeof(FillMeIn), str.GetType());
+		Assert.Equal(typeof(Char), str.GetType());
 	}
 
 	[Step(3)]
 	public void CreateAStringWhichContainsDoubleQuotes()
 	{
 		var str = "Hello, \"World\"";
-		Assert.Equal(FILL_ME_IN, str.Length);
+		Assert.Equal(14, str.Length);
 	}
 
 	[Step(4)]
@@ -40,7 +40,7 @@ public class AboutStrings : Koan
 		//The @ symbol creates a 'verbatim string literal'. 
 		//Here's one thing you can do with it:
 		var str = @"Hello, ""World""";
-		Assert.Equal(FILL_ME_IN, str.Length);
+		Assert.Equal(14, str.Length);
 	}
 
 	[Step(5)]
@@ -48,7 +48,7 @@ public class AboutStrings : Koan
 	{
 		var strA = @"Verbatim Strings can handle both ' and "" characters (when escaped)";
 		var strB = "Verbatim Strings can handle both ' and \" characters (when escaped)";
-		Assert.Equal(FILL_ME_IN, strA.Equals(strB));
+		Assert.Equal(true, strA.Equals(strB));
 	}
 
 	[Step(6)]
@@ -64,8 +64,8 @@ broken line";
 
 		// Make sure to use a literal string.
 		// Escaped characters in verbatim strings are covered later.
-		var literalString = FILL_ME_IN;
-		Assert.Equal(FILL_ME_IN, verbatimString.Length);
+		var literalString = "I\nam a\nbroken line";
+		Assert.Equal(literalString.Length, verbatimString.Length);
 
 		// For verbatim strings, the newline character used will depend on
 		// whether the source file uses a \r\n or a \n ending and they have
@@ -84,7 +84,9 @@ broken line";
 		//the hardcoded escape sequence. A much better way
 		//(We'll handle concatenation and better ways of that in a bit)
 		var literalString = "I" + System.Environment.NewLine + "am a" + System.Environment.NewLine + "broken line";
-		var verbatimString = FILL_ME_IN;
+		var verbatimString = @"I
+am a
+broken line";
 		Assert.Equal(literalString, verbatimString);
 	}
 
@@ -92,7 +94,7 @@ broken line";
 	public void PlusWillConcatenateTwoStrings()
 	{
 		var str = "Hello, " + "World";
-		Assert.Equal(FILL_ME_IN, str);
+		Assert.Equal("Hello, World", str);
 	}
 
 	[Step(9)]
@@ -101,8 +103,8 @@ broken line";
 		var strA = "Hello, ";
 		var strB = "World";
 		var fullString = strA + strB;
-		Assert.Equal(FILL_ME_IN, strA);
-		Assert.Equal(FILL_ME_IN, strB);
+		Assert.Equal("Hello, ", strA);
+		Assert.Equal("World", strB);
 	}
 
 	[Step(10)]
@@ -111,8 +113,8 @@ broken line";
 		var strA = "Hello, ";
 		var strB = "World";
 		strA += strB;
-		Assert.Equal(FILL_ME_IN, strA);
-		Assert.Equal(FILL_ME_IN, strB);
+		Assert.Equal("Hello, World", strA);
+		Assert.Equal("World", strB);
 	}
 
 	[Step(11)]
@@ -126,8 +128,7 @@ broken line";
 		var originalString = strA;
 		var strB = "World";
 		strA += strB;
-		Assert.Equal(FILL_ME_IN, originalString);
-
+		Assert.Equal("Hello, ", originalString);
 		//What just happened? Well, the string concatenation actually
 		//takes strA and strB and creates a *new* string in memory
 		//that has the new value. It does *not* modify the original
@@ -143,7 +144,7 @@ broken line";
 	{
 		var world = "World";
 		var str = String.Format("Hello, {0}", world);
-		Assert.Equal(FILL_ME_IN, str);
+		Assert.Equal("Hello, World", str);
 	}
 
 	[Step(13)]
